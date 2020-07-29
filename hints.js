@@ -115,7 +115,8 @@ let Hints = (function() {
             inlineAutocomplete: false,
             hints: ['aaaa', 'bac', 'baac', 'd'],
             trigger: '_',
-            triggerLength: 1
+            triggerLength: 1,
+            version: '1.0'
         }
 
         if (!settings || !settings instanceof Object) {
@@ -144,6 +145,12 @@ let Hints = (function() {
             if (settings.hasOwnProperty('inlineAutocomplete')) {
                 _.options.focusOnOpen = true;
                 _.options.automaticSelectionConfirm = [39];
+            }
+
+            if (settings.hasOwnProperty('version')) {
+                if (settings.version === '1.1') {
+                    _.options.version = settings.version;
+                }
             }
         }
 
