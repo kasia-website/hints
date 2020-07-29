@@ -6,6 +6,11 @@
     --custom-5: #3D5A73;
 }
 
+::selection {
+    background: var(--white);
+    color: var(--custom-4);
+}
+
 body {
     background: var(--custom-2);
     color: var(--white);

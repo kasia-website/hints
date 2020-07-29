@@ -15,15 +15,16 @@ new Hints('#demo-triggers', {
     }
 });
 
-new Hints('#demo-append', {
+new Hints('#demo-inline-autocomplete', {
     behavior: 'replace',
-    focusOnOpen: true,
-    inlineAutocomplete: true,
     hints: {
-        'a': ['align-content', 'align-items', 'align-self'],
-        'b': ['background', 'border', 'bottom', 'box-shadow', 'box-sizing'],
-        'c': ['color', 'content', 'cursor'],
-        'd': ['display'],
-        'f': ['font-size', 'font-family', 'font-weight']
-    }
+        'B': ['Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg', 'Bremen'],
+        'H': ['Hamburg', 'Hessen'],
+        'M': ['Mecklenburg-Vorpommern'],
+        'N': ['Niedersachsen', 'Nordrhein-Westfalen'],
+        'R': ['Rheinland-Pfalz'],
+        'S': ['Saarland', 'Sachsen', 'Sachsen-Anhalt', 'Schleswig-Holstein'],
+        'T': ['Thüringen']
+    },
+    inlineAutocomplete: true,
 });

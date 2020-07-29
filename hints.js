@@ -377,6 +377,7 @@ Hints.prototype.handleKeyDown = function(event) {
 
     if (event.which === BACK) {
         if (_.source.selectionStart !== _.source.selectionEnd) {
+            event.preventDefault();
             _.source.value = _.source.value.substring(0, _.source.selectionStart);
         } else if (_.matchLength > 0) {
             _.matchLength--;
@@ -389,7 +390,8 @@ Hints.prototype.handleKeyDown = function(event) {
 
     //force show on Ctrl + Space
     if (event.ctrlKey && event.which === SPACE) {
-        _.matchLength = 0;
+        //TODO handle suffix on replace behavior
+        _.resetMatchLength();
         _.showHints();
         return;
     }
@@ -419,9 +421,10 @@ Hints.prototype.handleKeyDown = function(event) {
             break;
         case ESC:
             event.preventDefault();
+            _.source.setSelectionRange(_.source.value.length, _.source.value.length);
             _.hideHints();
             break;
-        case UP:
+        case UP: //TODO force open
             event.preventDefault();
             if (_.focusedHint) {
                 let index = _.getNextHintIndex();
@@ -432,7 +435,7 @@ Hints.prototype.handleKeyDown = function(event) {
             }
             _.visuallyFocus(_.focusedHint);
             break;
-        case DOWN:
+        case DOWN: //TODO force open
             event.preventDefault();
             if (_.focusedHint) {
                 let index = _.getPreviousHintIndex();
@@ -543,7 +546,7 @@ Hints.prototype.insertHint = function() {
     insert = _.focusedHint.textContent.substring(_.matchLength);
 
     if (_.options.inlineAutocomplete) {
-        _.source.setSelectionRange(end, end);
+        _.source.setSelectionRange(end, end, "forward");
     } else {
         _.source.value = value.substring(0, end) + insert + value.substring(end);
         _.source.selectionEnd = end + insert.length;
@@ -737,7 +740,7 @@ Hints.prototype.visuallyFocus = function(element) {
         end = start + _.focusedHint.innerText.length - _.matchLength;
 
         _.source.value += _.focusedHint.innerText.substring(_.matchLength);
-        _.source.setSelectionRange(start, end);
+        _.source.setSelectionRange(start, end, "forward");
 
     }
 

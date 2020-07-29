@@ -33,9 +33,9 @@
         <small>Press Ctrl + Space to show hints</small>
         <input id="demo-simple">
     </label>
-    <code><pre>new Hints('#demo-simple', {
+    <pre><code>new Hints('#demo-simple', {
     hints:  ['ä', 'ö', 'ü', 'ß']
-});</pre></code>
+});</code></pre>
     <figcaption>Text input with hints for german letters "ä", "ö", "ü", "ß".</figcaption>
 </figure>
 <h3>Different hints for different triggers</h3>
@@ -45,7 +45,7 @@
         <span>My favourite region in Germany (e.g. Brandenburg, Sachsen): </span>
         <input id="demo-triggers">
     </label>
-    <code><pre>new Hints('#demo-triggers', {
+    <pre><code>new Hints('#demo-triggers', {
     behavior: 'replace',
     hints: {
         'B': ['Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg', 'Bremen'],
@@ -56,7 +56,7 @@
         'S': ['Saarland', 'Sachsen', 'Sachsen-Anhalt', 'Schleswig-Holstein'],
         'T': ['Thüringen']
     }
-});</pre></code>
+});</code></pre>
     <figcaption>Text input with different hints depending on input value.</figcaption>
 </figure>
 <h3>Inline autocomplete</h3>
@@ -64,16 +64,22 @@
 <figure>
     <label>
         <span>How to turn an HTML element into flex container?</span>
-        <input id="demo-append">
+        <input id="demo-inline-autocomplete">
     </label>
-    <code><pre>new Hints('#demo-append', {
-    focusOnOpen: true,
+    <pre><code>new Hints('#demo-inline-autocomplete', {
+    behavior: 'replace',
     hints: {
-        'd': ['display'],
-        ':': ['block', 'flex', 'grid', 'inline', 'none']
-    }
-});</pre></code>
-    <figcaption>Text input with different hints depending on input.</figcaption>
+        'B': ['Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg', 'Bremen'],
+        'H': ['Hamburg', 'Hessen'],
+        'M': ['Mecklenburg-Vorpommern'],
+        'N': ['Niedersachsen', 'Nordrhein-Westfalen'],
+        'R': ['Rheinland-Pfalz'],
+        'S': ['Saarland', 'Sachsen', 'Sachsen-Anhalt', 'Schleswig-Holstein'],
+        'T': ['Thüringen']
+    },
+    inlineAutocomplete: true,
+});</code></pre>
+    <figcaption>Text input with different hints depending on input and inline autocomplete.</figcaption>
 </figure>
 <h3>Add & Remove</h3>
 <p>Update your hint list whenever you need it.</p>
