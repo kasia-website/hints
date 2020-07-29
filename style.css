@@ -1,0 +1,326 @@
+:root {
+    --custom-1: #486902;
+    --custom-2: #A9BF04;
+    --custom-3: #CCD96C;
+    --custom-4: #A6A049;
+    --custom-5: #D9CBA0;
+
+    --custom-submit: #823F09;
+    --custom-submit-dark: #301703;
+    --custom-focus: var(--custom-1);
+
+    --white: #FFF;
+
+    --border-radius: 0;
+
+    background: var(--custom-2);
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    border: 0;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: inherit;
+    line-height: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+* + * {
+    margin-top: 1em;
+}
+
+.sr-only + *,
+legend + *,
+li {
+    margin-top: 0;
+}
+
+dl,
+ol,
+ul {
+   padding-left: 2.5rem;
+}
+
+body {
+    background: #fff;
+    border-radius: var(--border-radius);
+    font-family: Arial, sans-serif;
+    line-height: 1.5;
+    margin: 2vw;
+    padding: 2vw;
+
+    --color-error: red;
+    --color-success: green;
+}
+
+h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+    text-align: center;
+}
+
+h2 {
+    align-items: center;
+    display: flex;
+    padding-top: 1rem;
+}
+
+em {
+    color: var(--custom-1);
+    font-weight: bold;;
+}
+
+fieldset {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5rem 0;
+}
+
+figcaption {
+    border-top: 1px solid;
+    display: inline-block;
+    font-size: 0.875em;
+    margin-top: 2rem;
+    padding: 0.75rem 0.5rem 0;
+}
+
+figure {
+    background: rgba(0,0,0,0.1);
+    border: 2px solid;
+    padding: 1rem;
+}
+
+legend {
+    margin-left: 1rem;
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+output {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 32rem;
+}
+
+code,
+input,
+svg,
+textarea {
+    border: 0.125rem solid;
+    border-color: var(--custom-5);
+    border-radius: var(--border-radius);
+    color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    height: auto;
+    line-height: inherit;
+    max-width: 100%;
+}
+
+input {
+    margin-top: 0.5rem;
+    padding: 0.5rem 0.5rem;
+    max-width: 20rem;
+}
+
+input:focus,
+textarea:focus {
+    background: var(--custom-3);
+    border-color: var(--custom-focus);
+    box-shadow: 0 0 6px 3px var(--custom-4);
+    outline: none;
+}
+
+textarea {
+    padding: 1em;
+    min-height: 20em;
+}
+
+input,
+textarea {
+    background: var(--custom-3);
+}
+
+code {
+    background: rgba(0,0,0,0.1);
+    border-color: var(--custom-1);
+    display: block;
+    font-family: monospace;
+    padding: 1em;
+}
+
+pre {
+    overflow-x: auto;
+}
+
+a {
+    color: inherit;
+    position: relative;
+    text-decoration-color: var(--custom-1, currentColor);
+}
+
+a::before {
+    background-color: var(--custom-1, currentColor);
+    bottom: 3px;
+    content: "";
+    left: 0;
+    height: 2px;
+    position: absolute;
+    transition: 0.2s width;
+    width: 0;
+}
+
+a:focus::before,
+a:hover::before {
+    text-decoration-color: transparent;
+    width: 100%;
+}
+
+nav {
+    border-bottom: 3px solid;
+    border-color: var(--custom-1);
+    margin-left: -2vw;
+    margin-right: -2vw;
+    padding: 1rem;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-evenly;
+    list-style-type: none;
+}
+
+nav a {
+    display: inline-block;
+    margin-top: 0;
+    padding: 0.5rem 0.75rem 0;
+    text-decoration-color: transparent;
+}
+
+nav a::first-letter {
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+nav a::before {
+    left: 0.75rem;
+}
+
+nav a:focus::before,
+nav a:hover::before {
+    width: calc(100% - 1.5rem);
+}
+
+button,
+[role="button"],
+[type="submit"] {
+    background: var(--custom-1);
+    border: none;
+    border-radius: var(--border-radius);
+    color: var(--white);
+    font-size: inherit;
+    font-weight: bold;
+    margin-bottom: 1em;
+    padding: 0.75rem 1.5rem;
+    text-transform: uppercase;
+}
+
+button:focus,
+[role="button"]:focus,
+[type="submit"]:focus {
+    background: var(--custom-4);
+    box-shadow: 0 0 6px 3px var(--custom-4);
+    outline: none;
+}
+
+form button:not([type]),
+[type="submit"] {
+    background: var(--custom-submit);
+}
+
+form button:not([type]):focus,
+[type="submit"]:focus {
+    background: var(--custom-submit-dark);
+}
+
+
+input[type=range] {
+    -webkit-appearance: none;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+    width: 100%;
+    height: 1rem;
+    cursor: pointer;
+    border-radius: 0;
+    border: 0.125rem solid;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    border: 0.125rem solid;
+    border-radius: var(--border-radius);
+    height: 3rem;
+    width: 1.5rem;
+    cursor: pointer;
+    -webkit-appearance: none;
+    margin-top: -1rem;
+}
+
+input[type=range]::-moz-range-track {
+    width: 100%;
+    height: 1rem;
+    cursor: pointer;
+    border-radius: 0;
+    border: none;
+}
+
+input[type=range]::-moz-range-thumb {
+    background: var(--custom-2);
+    border: 0.125rem solid;
+    height: 3rem;
+    width: 1.5rem;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+}
+
+input[type=range]::-ms-track {
+    width: 100%;
+    height: 1rem;
+    cursor: pointer;
+}
+
+input[type=range]::-ms-fill-lower {
+    border: 0.125rem solid;
+    border-radius: 0;
+}
+
+input[type=range]::-ms-fill-upper {
+    border: 0.125rem solid;
+    border-radius: 0;
+}
+
+input[type=range]::-ms-thumb {
+    border: 0.125rem solid;
+    border-radius: var(--border-radius);
+    width: 1.5rem;
+    cursor: pointer;
+    height: 1rem;
+}

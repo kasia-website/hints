@@ -1,0 +1,77 @@
+:root {
+    --custom-1: #253659;
+    --custom-2: #111826;
+    --custom-3: #07090D;
+    --custom-4: #273D59;
+    --custom-5: #3D5A73;
+}
+
+body {
+    background: var(--custom-2);
+    color: var(--white);
+}
+
+code {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+em {
+    color: var(--custom-4);
+}
+
+figure {
+    background: rgba(0,0,0,0.5);
+    border-color: var(--custom-4);
+}
+
+label {
+    display: flex;
+    flex-direction: column;
+}
+
+label small {
+    margin-top: 0.25rem;
+    order: 1;
+}
+
+label input {
+    margin-top: 0.5rem;
+}
+
+/* HINTS */
+.hints-container {
+    --top: 0; /* set in javascript */
+
+    background: white;
+    border: 2px solid;
+    border-top: none;
+    color: #222;
+    font-size: 0.875rem;
+    margin-top: 0;
+    position: fixed;
+    top: calc(var(--top) * 1px);
+    width: 10rem;
+    z-index: 1;
+}
+
+.hints-container ul {
+    list-style-type: none;
+    padding-left: 0
+}
+
+.hints-container li {
+    padding: 0.25rem 0.5rem;
+}
+
+.hints-container * + li {
+    border-top: 1px solid;
+}
+
+.hints-container li:nth-child(even) {
+    background: rgba(0,0,0,0.1);
+}
+
+.hints-container li.focus {
+    background: rgba(0,0,0,0.2);
+    font-weight: bold;
+}

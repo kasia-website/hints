@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hints</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="custom.css">
+</head>
+<body>
+<nav>
+<ul>
+<li><a href="#demos">Demos</a></li>
+<li><a href="#usage">Usage</a></li>
+<li><a href="#settings">Settings</a></li>
+<li><a href="#get-it-now">Get it now</a></li>
+</ul>
+</nav>
+<h1>Hints - small javascript library to provide autocompletion help</h1>
+<h2>Features</h2>
+<ul>
+<li>Fully responsive. Hints always stays on screen.</li>
+<li>Keyboard friendly. Assistive technology support with aria included.</li>
+<li>Customizable. Adding, removing, filtering hints as you wish.</li>
+</ul>
+<h2>Demos</h2>
+<h3>Simple hint list</h3>
+<p>Perfect to hint always the same items, independent of user input.</p>
+<figure>
+    <label>
+        <span>My favourite city in Germany (e.g. Köln, München, Nürnberg): </span>
+        <small>Press Ctrl + Space to show hints</small>
+        <input id="demo-simple">
+    </label>
+    <code><pre>new Hints('#demo-simple', {
+    hints:  ['ä', 'ö', 'ü', 'ß']
+});</pre></code>
+    <figcaption>Text input with hints for german letters "ä", "ö", "ü", "ß".</figcaption>
+</figure>
+<h3>Different hints for different triggers</h3>
+<p>Useful when only some hints should be displayed depending on user input.</p>
+<figure>
+    <label>
+        <span>My favourite region in Germany (e.g. Brandenburg, Sachsen): </span>
+        <input id="demo-triggers">
+    </label>
+    <code><pre>new Hints('#demo-triggers', {
+    behavior: 'replace',
+    hints: {
+        'B': ['Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg', 'Bremen'],
+        'H': ['Hamburg', 'Hessen'],
+        'M': ['Mecklenburg-Vorpommern'],
+        'N': ['Niedersachsen', 'Nordrhein-Westfalen'],
+        'R': ['Rheinland-Pfalz'],
+        'S': ['Saarland', 'Sachsen', 'Sachsen-Anhalt', 'Schleswig-Holstein'],
+        'T': ['Thüringen']
+    }
+});</pre></code>
+    <figcaption>Text input with different hints depending on input value.</figcaption>
+</figure>
+<h3>Inline autocomplete</h3>
+<p>When you want to append hint value to the input.</p>
+<figure>
+    <label>
+        <span>How to turn an HTML element into flex container?</span>
+        <input id="demo-append">
+    </label>
+    <code><pre>new Hints('#demo-append', {
+    focusOnOpen: true,
+    hints: {
+        'd': ['display'],
+        ':': ['block', 'flex', 'grid', 'inline', 'none']
+    }
+});</pre></code>
+    <figcaption>Text input with different hints depending on input.</figcaption>
+</figure>
+<h3>Add & Remove</h3>
+<p>Update your hint list whenever you need it.</p>
+<figure>
+</figure>
+<h2>Getting started</h2>
+<ol>
+<li>
+    <h3>Setup your HTML.</h3>
+    <figure>
+    </figure>
+</li>
+<li>
+    <h3>Move /hints folder into your project.</h3>
+</li>
+<li>
+    <h3>Add hints.css in your head.</h3>
+    <figure>
+    </figure>
+</li>
+<li>
+    <h3>Add hints.js before your closing body tag.</h3>
+    <figure>
+    </figure>
+</li>
+<li>
+    <h3>Initialize hints.</h3>
+    <figure>
+    </figure>
+</li>
+</ol>
+<h3>When complete, your HTML should look something like this:</h3>
+<figure>
+</figure>
+<h2>Settings</h2>
+<ul>
+<li>
+    <p><strong>anyPosition</strong></p>
+    <p><b>Type:</b> boolean</p>
+    <p><b>Default:</b> false </p>
+    <p>If set to true any hint containing user input will be showed, no matter the position e.g. typing "cat" would match "concat"; If set to false only hints beginning with user input will be showed.</p>
+</li>
+<li>
+    <p><strong>behavior</strong></p>
+    <p><b>Type:</b> string</p>
+    <p><b>Default:</b> 'append' </p>
+    <p><b>Accepted:</b> 'append', 'replace', 'autocomplete'</p>
+    <p>If set to true any hint containing user input will be showed, no matter the position e.g. typing "cat" would match "concat"; If set to false only hints beginning with user input will be showed.</p>
+</li>
+<li>
+    <p><strong>caseSensitive</strong></p>
+    <p><b>Type:</b> boolean</p>
+    <p><b>Default:</b> true </p>
+    <p>If set to true any hint containing user input will be showed, no matter the position e.g. typing "cat" would match "concat"; If set to false only hints beginning with user input will be showed.</p>
+</li>
+<li>
+    <p><strong>emphasize</strong></p>
+    <p><b>Type:</b> boolean</p>
+    <p><b>Default:</b> true </p>
+    <p>If set to true any hint containing user input will be showed, no matter the position e.g. typing "cat" would match "concat"; If set to false only hints beginning with user input will be showed.</p>
+</li>
+<li>
+    <p><strong>focusOnOpen</strong></p>
+    <p><b>Type:</b> boolean</p>
+    <p><b>Default:</b> false </p>
+    <p>If set to true any hint containing user input will be showed, no matter the position e.g. typing "cat" would match "concat"; If set to false only hints beginning with user input will be showed.</p>
+</li>
+<li>
+    <p><strong>hints</strong></p>
+    <p><b>Type:</b> array</p>
+    <p><b>Default:</b> empty </p>
+    <p>If set to true any hint containing user input will be showed, no matter the position e.g. typing "cat" would match "concat"; If set to false only hints beginning with user input will be showed.</p>
+</li>
+
+<li>
+    <p><strong>trigger</strong></p>
+    <p><b>Type:</b> string</p>
+    <p><b>Default:</b> '_' </p>
+    <p>Character or characters that trigger displaying of popup. If you want different triggers for different hint lists define them in <code>hints</code> setting. If you do so, you don't need to populate this setting.</code></p>
+</li>
+<li>
+    <p><strong>triggerLength</strong></p>
+    <p><b>Type:</b> integer</p>
+    <p><b>Default:</b> 1 </p>
+    <p>Number of characters that need to be typed before hint list gets displayed.</p>
+</li>
+<li>
+    <p><strong>version</strong></p>
+    <p><b>Type:</b> string</p>
+    <p><b>Default:</b> '1.0' </p>
+    <p><b>Accepted:</b> '1.0', '1.1' </p>
+    <p>This option corresponds to <a href="https://www.w3.org/TR/wai-aria-practices-1.1/#combobox">WAI ARIA</a> specification version.</p>
+</li>
+</ul>
+<h2>Events</h2>
+<ul>
+<li>
+    <p><strong>init</strong></p>
+    <p><b>Arguments:</b> hints </p>
+    <p>Fires after first initialization.</p>
+</li>
+</ul>
+<h2>Methods</h2>
+<ul>
+<li>
+    <p><strong>add</strong></p>
+    <p><b>Arguments:</b> new hint or hints; string, array or Object</p>
+    <p>Add new hints.</p>
+</li>
+</ul>
+<h2>Get it now</h2>
+<a href="#">Download now</a>
+<a href="#">View on Github</a>
+
+<script src="hints.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
