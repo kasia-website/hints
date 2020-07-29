@@ -231,7 +231,7 @@ Hints.prototype.buildHintListContent = function() {
         _.hintList.appendChild(hint);
     }
 
-    return !!newHints.length;
+    return newHints.length;
 }
 
 Hints.prototype.emphasize = function(item, index, arr) {
@@ -277,7 +277,7 @@ Hints.prototype.getHints = function() {
 
     if (_.options.hints instanceof Object) {
         if (_.options.hints.hasOwnProperty(_.lastCharacter())) {
-            hints = _.options.hints[_.lastCharacter()];
+            hints = _.options.hints[_.lastCharacter()]; //show for specific trigger
         } else {
             hints = [].concat.apply([], Object.values(_.options.hints)); //show all
         }
@@ -313,6 +313,10 @@ Hints.prototype.getSuffix = function() {
 
     end = _.source.selectionEnd;
     length = _.matchLength;
+
+    if (length === 0 && _.options.behavior === "replace") {
+        _.matchLength = _.options.triggerLength;
+    }
 
     return _.source.value.substr(
         end - length,
@@ -699,7 +703,7 @@ Hints.prototype.showHints = function() {
 
     count = _.buildHintListContent();
 
-    if (!count) {
+    if (count === 0) {
         _.hideHints();
         return;
     }
