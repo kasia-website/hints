@@ -84,6 +84,20 @@
 <h3>Add & Remove</h3>
 <p>Update your hint list whenever you need it.</p>
 <figure>
+    <label>
+        <span>My favourite vegetable:</span>
+        <input id="demo-add-remove">
+    </label>
+    <pre><code>new Hints('#demo-add-remove', {
+    behavior: 'replace',
+    hints: {
+        'C': ['Cabbage', 'Carrot', 'Cucumber'],
+        'O': ['Onion'],
+        'P': ['Potato'],
+        'T': ['Tomato'],
+    }
+});</code></pre>
+    <figcaption>Text input with different hints depending on input and inline autocomplete.</figcaption>
 </figure>
 <h2>Getting started</h2>
 <ol>
@@ -115,7 +129,7 @@
 <figure>
 </figure>
 <h2>Settings</h2>
-<ul>
+<ul class="list-with-margin">
 <li>
     <p><strong>anyPosition</strong></p>
     <p><b>Type:</b> boolean</p>
@@ -153,7 +167,18 @@
     <p><b>Default:</b> empty </p>
     <p>If set to true any hint containing user input will be showed, no matter the position e.g. typing "cat" would match "concat"; If set to false only hints beginning with user input will be showed.</p>
 </li>
-
+<li>
+    <p><strong>offset</strong></p>
+    <p><b>Type:</b> number</p>
+    <p><b>Default:</b> 16 </p>
+    <p>Number of pixels between hint box and window boundaries.</p>
+</li>
+<li>
+    <p><strong>simplePositioning</strong></p>
+    <p><b>Type:</b> boolean</p>
+    <p><b>Default:</b> false </p>
+    <p>If set to true expensive positioning under cursor will we omitted and hint container's left edge will be aligned with input's left bottom corner.</p>
+</li>
 <li>
     <p><strong>trigger</strong></p>
     <p><b>Type:</b> string</p>

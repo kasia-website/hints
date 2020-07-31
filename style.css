@@ -35,7 +35,8 @@
     padding: 0;
 }
 
-* + * {
+* + *,
+.list-with-margin > * + li {
     margin-top: 1em;
 }
 

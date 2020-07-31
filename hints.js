@@ -114,6 +114,10 @@ let Hints = (function() {
             focusOnOpen: false,
             inlineAutocomplete: false,
             hints: ['aaaa', 'bac', 'baac', 'd'],
+            maxHeight: 300,
+            minHeight: 100,
+            offset: 16,
+            simplePositioning: false,
             trigger: '_',
             triggerLength: 1,
             version: '1.0'
@@ -177,26 +181,29 @@ Hints.prototype.add = function(hint) {
     }
 
     //multiple hints
-    if (hint instanceof Array) {
-        _.hints = {
+    if (Array.isArray(hint)) {
+        _.hints = [
             ..._.hints,
             ...hint
-        }
+        ]
     }
 
     if (hint instanceof Object && _.hints instanceof Object) {
         for (let hintKey in hint) {
             if (_.hints.hasOwnProperty(hintKey)) {
-                _.hints[hintKey] = {
+                _.hints[hintKey] = [
                     ..._.hints[hintKey],
                     ...hint[hintKey]
-                }
+                ];
             } else {
-                _.hints[hintKey] = hint[hintKey];
+                _.hints[hintKey] = [];
+                hint[hintKey].forEach(function(item) {
+                    _.hints[hintKey].push(item);
+                });
+                _.options.trigger += hintKey.substring(0, _.options.triggerLength);
             }
         }
     }
-
 }
 
 Hints.prototype.buildHintContainer = function() {
@@ -458,6 +465,12 @@ Hints.prototype.handleKeyDown = function(event) {
     }
 }
 
+Hints.prototype.handleResize = function(event) {
+    let _ = this;
+
+    _.hideHints();
+}
+
 Hints.prototype.handleScroll = function(event) {
     let _ = this, top;
 
@@ -539,6 +552,8 @@ Hints.prototype.initializeEvents = function() {
     document.addEventListener('click', _.handleClick.bind(_));
 
     window.addEventListener('scroll', _.handleScroll.bind(_));
+
+    window.addEventListener('resize', _.handleResize.bind(_));
 }
 
 Hints.prototype.insertHint = function() {
@@ -609,17 +624,51 @@ Hints.prototype.match = function() {
 }
 
 Hints.prototype.positionHintBox = function() {
-    let _ = this, rect, selection, top;
+    let _ = this, rect, hrect, selection, top, left, height;
 
     if (!_.hintContainer) {
         return;
     }
 
-    selection = _.source.selectionEnd;
-    rect = getTextBoundingRect(_.source, selection);
+    rect = _.source.getBoundingClientRect();
+    _.hintContainer.style.setProperty('visibility', 'hidden');
+    _.hintContainer.style.setProperty('display', 'block');
+    hrect = _.hintContainer.getBoundingClientRect();
+    _.hintContainer.style.removeProperty('visibility');
+
+    top = rect.top + rect.height;
+    left = rect.left;
+
+    if (!_.options.simplePositioning) {
+        selection = _.source.selectionEnd;
+        rect = getTextBoundingRect(_.source, selection);
+        top = rect.top + 16;
+        left = rect.left;
+    }
+
+    //Part of hints hidden below the lower edge
+    if (top + hrect.height + _.options.offset > window.innerHeight) {
+        //make hint container shorter
+        if (top + _.options.minHeight < window.innerHeight) {
+            height = window.innerHeight - top - _.options.offset;
+        //place hint container above the input
+        } else {
+            height = _.options.maxHeight;
+            top = rect.top - height - _.options.offset;
+
+            //top above upper edge
+            if (top < 0) {
+                height += top;
+                top = _.options.offset;
+                height -= _.options.offset;
+            }
+        }
+    }
+
     _.hintContainer.setAttribute('data-y-offset', window.pageYOffset);
-    _.hintContainer.style.setProperty('--top', rect.top + 16);
-    _.hintContainer.style.setProperty('left', +(rect.left) + 'px');
+    _.hintContainer.style.setProperty('--height', height);
+    _.hintContainer.style.setProperty('--top', top);
+    _.hintContainer.style.setProperty('--left', left);
 
 }
 
@@ -632,7 +681,7 @@ Hints.prototype.removeAll = function() {
 Hints.prototype.remove = function(hint) {
     let _ = this;
 
-    if (typeof hint == 'string' && _.hints.indexOf(hint) > -1) {
+    if (typeof hint === 'string' && _.hints.indexOf(hint) > -1) {
         _.hints.splice(_.hints.indexOf(hint), 1);
     }
 
@@ -647,7 +696,7 @@ Hints.prototype.remove = function(hint) {
     if (hint instanceof Object) {
         for(let hintKey in hint) {
             if (_.hints.hasOwnProperty(hintKey)) {
-                hint[hintKey].forEach(function(hint) {
+                _.hints[hintKey].forEach(function(hint) {
                     if (_.hints[hintKey].indexOf(hint) > -1) {
                         _.hints[hintKey].splice(_.hints[hintKey].indexOf(hint), 1);
                     }
@@ -718,8 +767,8 @@ Hints.prototype.showHints = function() {
         return;
     }
 
-    _.hintContainer.style.removeProperty('display');
     _.positionHintBox();
+    _.hintContainer.style.removeProperty('display');
 
     if (_.options.focusOnOpen) {
         _.focusedHint = _.hintList.firstElementChild;
@@ -748,8 +797,9 @@ Hints.prototype.visuallyFocus = function(element) {
 
         _.source.value += _.focusedHint.innerText.substring(_.matchLength);
         _.source.setSelectionRange(start, end, "forward");
-
     }
+
+    element.scrollIntoView(false);
 
     _.source.dispatchEvent(new Event('hintsfocus'));
 }
