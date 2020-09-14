@@ -30,15 +30,9 @@ new Hints('#demo-inline-autocomplete', {
 });
 
 counter = 0;
-vegetablesInput = document.getElementById('demo-add-remove');
-let vegetables = new Hints(vegetablesInput, {
-    behavior: 'replace',
-    hints: {
-        'C': ['Cabbage', 'Carrot', 'Cucumber'],
-        'O': ['Onion'],
-        'P': ['Potato'],
-        'T': ['Tomato'],
-    }
+addRemoveInput = document.getElementById('demo-add-remove');
+let addRemove = new Hints(addRemoveInput, {
+    trigger: 'I'
 });
 
 let status = document.createElement('div');
@@ -47,20 +41,30 @@ status.setAttribute('role', 'status');
 let add = document.createElement('button');
 add.innerText = 'Add hint';
 add.addEventListener('click', function(event) {
-   vegetables.add({'I': ['Item ' + counter++]});
-   status.innerText = 'Appended new item: Item ' + (+counter - 1) + '.'
-   vegetablesInput.focus();
+   addRemove.add('Item ' + ++counter);
+
+    let text = 'Appended new item: Item ' + counter + '.\n Available hints: ';
+        text += addRemove.hints.join();
+        text += '.';
+
+    status.innerText = text;
+    addRemoveInput.focus();
 });
 
 let remove = document.createElement('button');
 remove.innerText = 'Remove hint';
 remove.addEventListener('click', function(event) {
-    vegetables.remove({'I': ['Item ' + counter--]});
-    status.innerText = 'Removed item: Item ' + (+counter + 1) + '.'
-    vegetablesInput.focus();
+    addRemove.remove('Item ' + counter);
+
+    let text = 'Removed item: Item ' + counter-- + '.\n Available hints: ';
+        text += addRemove.hints.join();
+        text += '.';
+
+    status.innerText = text;
+    addRemoveInput.focus();
 })
 
-vegetablesInput.insertAdjacentElement('afterend', add);
+addRemoveInput.parentElement.insertAdjacentElement('afterend', add);
 add.insertAdjacentElement('afterend', remove);
 remove.insertAdjacentElement('afterend', status);
 

@@ -113,7 +113,7 @@ let Hints = (function() {
             emphasize: true,
             focusOnOpen: false,
             inlineAutocomplete: false,
-            hints: ['aaaa', 'bac', 'baac', 'd'],
+            hints: [],
             maxHeight: 300,
             minHeight: 100,
             offset: 16,
